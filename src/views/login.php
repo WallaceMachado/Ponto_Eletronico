@@ -27,7 +27,7 @@
                     <label for="email">E-mail</label>
                     <input type="email" id="email" name="email"
                         class="form-control 
-                        
+                        value="<?= $email ?>"
                         placeholder="Informe o e-mail" autofocus>
                     <div class="invalid-feedback">
                         <?= $errors['email'] ?>
@@ -37,6 +37,7 @@
                     <label for="password">Senha</label>
                     <input type="password" id="password" name="password"
                         class="form-control"
+                       
                         placeholder="Informe a senha">
                     <div class="invalid-feedback">
                         <?= $errors['password'] ?>
