@@ -1,5 +1,5 @@
 <?php
-$errors = [];
+$errors = [];// array de erros que é transmitido para a view
 
 
 if($exception) {
@@ -8,13 +8,23 @@ if($exception) {
         'message' => $exception->getMessage()
     ];
 
-   
+    if(get_class($exception) === 'ValidationException') {
+        $errors = $exception->getErrors();
+    }
+}
+
+$alertType = '';
+
+if($message['type'] === 'error') {
+    $alertType = 'danger';
+} else {
+    $alertType = 'success';
 }
 ?>
 
 <?php if($message): ?>
-    <div 
-        class="my-3 alert alert-danger" role="alert">
+    <div role="alert"
+        class="my-3 alert alert-<?= $alertType ?>">
         <?= $message['message'] ?>
     </div>
 <?php endif ?>
