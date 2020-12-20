@@ -10,13 +10,16 @@ class Login extends Model {
     public function checkLogin() {
        
         $user = User::getOne(['email' => $this->email]);
-        
+         if($user) {
+            if($user->end_date) {// atributo que informa se o usuário ainda é funcionario da empresa ou foi desligado
+                throw new AppException('Usuário está desligado da empresa.');
+            }
 
-            // VERIFICA SE A SENHA É CORRETA password_verificy é interno do php
             if(password_verify($this->password, $user->password)) {
                 return $user;
             }
+        }
         
-        throw new Exception();
+            throw new AppException('Usuário e Senha inválidos.');
     }
 }
