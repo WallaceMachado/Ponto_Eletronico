@@ -16,6 +16,7 @@ class Database {
         return $conn;
     }
 
+    //pegar o resultado a partir de uma consulta no banco
     public static function getResultFromQuery($sql) {
         $conn = self::getConnection();
         $result = $conn->query($sql);
