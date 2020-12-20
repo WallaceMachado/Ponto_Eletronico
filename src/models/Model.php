@@ -41,4 +41,36 @@ class Model {
     public function getValues() {
         return $this->values;
     }
+
+    public static function getSelect($filters = [],$columns = '*') {
+        $sql="SELECT {$columns} FROM "
+        . static::$tableName
+        .static::getFilters($filters);
+        return $sql;
+    }
+
+    private static function getFilters($filters) {
+        $sql = '';
+        if(count($filters) > 0) {
+            $sql .= " WHERE 1 = 1";// condição sempre verdadeira e independente dos filtros, feito isso para poder utilizar a função and
+            foreach($filters as $column => $value) {
+               
+                    $sql .= " AND ${column} = " . static::getFormatedValue($value);
+                }
+            }
+         
+        return $sql;
+    }
+
+    // verifica se o paramento é do formato 'string' se não for ele altera para que seja
+    private static function getFormatedValue($value) {
+        if(is_null($value)) {
+            return "null";
+        } elseif(gettype($value) === 'string') {
+            return "'${value}'";
+        } else {
+            return $value;
+        }
+    }
+
 }
