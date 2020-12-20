@@ -1,6 +1,6 @@
 <?php
 // regras de negocio do objeto usuário e acesso ao banco de dados
-require_once(realpath(MODEL_PATH . '/Model.php'));
+
 class User extends Model {
 
     protected static $tableName = 'users';

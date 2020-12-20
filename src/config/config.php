@@ -8,10 +8,10 @@ define('DAILY_TIME', 60 * 60 * 8);
 
 // acesso as pastas Pastas
 define('MODEL_PATH', realpath(dirname(__FILE__) . '/../models'));// __FILE__ pega o caminho da pasta atual, o ponto concatena e /../ sai da pasta atual para a anterior e ai ele acessa a pasta models
-define('VIEW_PATH', realpath(dirname(__FILE__) . '/../views'));
-define('TEMPLATE_PATH', realpath(dirname(__FILE__) . '/../views/template'));
-define('CONTROLLER_PATH', realpath(dirname(__FILE__) . '/../controllers'));
-define('EXCEPTION_PATH', realpath(dirname(__FILE__) . '/../exceptions'));
+define('VIEW_PATH', realpath(dirname(__FILE__) . '/../views')); // definada nesse commit
+
+
 
 // carrega Arquivos/classe
 require_once(realpath(dirname(__FILE__) . '/database.php')); // carrega a classe que chama o database
+require_once(realpath(MODEL_PATH . '/Model.php'));

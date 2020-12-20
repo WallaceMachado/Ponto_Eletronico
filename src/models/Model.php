@@ -42,6 +42,12 @@ class Model {
         return $this->values;
     }
 
+    public static function getOne($filters = [], $columns = '*') {
+        $class = get_called_class();
+        $result = static::getResultSetFromSelect($filters, $columns);
+        return $result ? new $class($result->fetch_assoc()) : null;
+    }
+
     //pega os objetso de uma consulta no banco
     public static function get($filters = [], $columns = '*') {
         $objects = [];
