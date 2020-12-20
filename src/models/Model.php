@@ -18,7 +18,8 @@ class Model {
         if($arr) {// se o array estiver setado
             
             foreach($arr as $key => $value) {// pecorre o array e carrega no array values atributo da classe
-               $this->__set($key, $value);
+              // $this->__set($key, $value);
+              $this->$key = $value;// como o set tem como precedente o __ o metod oset fica automatico e não precisa ser declarado (metodo magico)
                 }
                 ;
             }
@@ -26,7 +27,7 @@ class Model {
         }
     
 
-    // pega o valor a partir de uma chave do array values
+    // __ coloca o metodo como parte do construtor pega o valor a partir de uma chave do array values
     public function __get($key) {
         return $this->values[$key];
     }
