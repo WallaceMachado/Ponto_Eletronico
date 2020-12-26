@@ -36,5 +36,6 @@ class Login extends Model {
         }
         
             throw new AppException('Usuário e Senha inválidos.');
+           
     }
 }

@@ -18,6 +18,7 @@ function loadView($viewName, $params = array()) {
     require_once(VIEW_PATH . "/{$viewName}.php");
 }
 
+// carrega os templates de tela
 function loadTemplateView($viewName, $params = array()) {
 
     if(count($params) > 0) {
@@ -28,18 +29,8 @@ function loadTemplateView($viewName, $params = array()) {
         }
     }
 
-    $user = $_SESSION['user'];
-    $workingHours = WorkingHours::loadFromUserAndDate($user->id, date('Y-m-d'));
-    $workedInterval = $workingHours->getWorkedInterval()->format('%H:%I:%S');
-    $exitTime = $workingHours->getExitTime()->format('H:i:s');
-    $activeClock = $workingHours->getActiveClock();
-
-    require_once(TEMPLATE_PATH . "/header.php");
-    require_once(TEMPLATE_PATH . "/left.php");
+       
     require_once(VIEW_PATH . "/{$viewName}.php");
-    require_once(TEMPLATE_PATH . "/footer.php");
+   
 }
 
-function renderTitle($title, $subtitle, $icon = null) {
-    require_once(TEMPLATE_PATH . "/title.php");
-}
