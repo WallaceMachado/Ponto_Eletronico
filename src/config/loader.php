@@ -31,6 +31,7 @@ function loadTemplateView($viewName, $params = array()) {
 
        
     require_once(TEMPLATE_PATH . "/header.php"); // template da view cabeçalho de pagina
+    require_once(TEMPLATE_PATH . "/left.php");// menu lateral
     require_once(VIEW_PATH . "/{$viewName}.php");
     require_once(TEMPLATE_PATH . "/footer.php");// rodapé de pagina
     
