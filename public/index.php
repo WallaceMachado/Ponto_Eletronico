@@ -3,10 +3,10 @@ error_reporting(E_ERROR);  // mostrar somente erros e não advertencias
 require_once(dirname(__FILE__, 2) . '/src/config/config.php');
 
 // para funcionar é necessário configurar o apache no arquivo .htaccess
-$uri =  urldecode($_SERVER['REQUEST_URI'])
-    
-    ; // pega a uri do navegador
-;
+$uri = urldecode(
+    parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)
+);
+
 
 if($uri === '/' || $uri === '' ||  $uri === '/index.php') {
     $uri = '/login.php';
