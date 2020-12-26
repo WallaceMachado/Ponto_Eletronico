@@ -1,7 +1,7 @@
 <?php
 
 
-loadModel('User');
+//loadModel('User'); não precisa pois está sendo carregado no config
 class Login extends Model {
 
     public function validate() {

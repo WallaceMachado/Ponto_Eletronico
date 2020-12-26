@@ -9,7 +9,7 @@ $uri = urldecode(
 
 
 if($uri === '/' || $uri === '' ||  $uri === '/index.php') {
-    $uri = '/login.php';
+    $uri = '/day_records.php';
 }
 //print_r((CONTROLLER_PATH . "{$uri}"));
 
