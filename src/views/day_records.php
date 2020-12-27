@@ -1,11 +1,12 @@
 <main class="content">
-   <div class="content-title mb-4">
-       <i class= "icon iconfont-check-alt mr-2"></i>
-       <div>
-           <h1>Rgistrar Ponto</h1>
-           <h1>Mantenha seu ponto consistente!</h1>
-       </div>
-   </div>
+<?php
+        renderTitle(
+            'Registrar Ponto',
+            'Mantenha seu ponto consistente!',
+            'icofont-check-alt'
+        );
+        
+    ?>
         
     
     <div class="card">
