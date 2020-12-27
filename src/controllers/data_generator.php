@@ -51,6 +51,7 @@ function getDayTemplateByOdds($regularRate, $extraRate, $lazyRate) {
 function populateWorkingHours($userId, $initialDate, $regularRate, $extraRate, $lazyRate) {
     $currentDate = $initialDate;// currentdate é a data atual
     $yesterday = new DateTime();
+    $yesterday->modify('-1 day');
   
     $columns = ['user_id' => $userId, 'work_date' => $currentDate];
 
