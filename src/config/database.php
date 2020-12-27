@@ -24,6 +24,7 @@ class Database {
         return $result;
     }
 
+    //executar um sql
     public static function executeSQL($sql) {
         $conn = self::getConnection();
         if(!mysqli_query($conn, $sql)) {
