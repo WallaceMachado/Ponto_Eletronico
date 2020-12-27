@@ -21,10 +21,27 @@ function getNextDay($date) {
     return $inputDate;
 }
 
+//soma de intervalos
 function sumIntervals($interval1, $interval2) {
+    $date = new DateTime('00:00:00');//pega o dia atua le seta para hoario zero
+    $date->add($interval1);
+    $date->add($interval2);// soma 
+    return (new DateTime('00:00:00'))->diff($date);// diff retorna um intervalo de tempo entre duas datas
+}
+
+function subtractIntervals($interval1, $interval2) {
     $date = new DateTime('00:00:00');
     $date->add($interval1);
-    $date->add($interval2);
+    $date->sub($interval2);// subtrai
     return (new DateTime('00:00:00'))->diff($date);
+}
+
+//converte para o formato de data
+function getDateFromInterval($interval) {
+    return new DateTimeImmutable($interval->format('%H:%i:%s'));
+}
+
+function getDateFromString($str) {
+    return DateTimeImmutable::createFromFormat('H:i:s', $str);
 }
 
