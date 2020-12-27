@@ -4,4 +4,6 @@
 session_start();
 requireValidSession();// valida se tem um usuário valido na sessão se não tiver ele direciona para a tela de login
 
-loadTemplateView('day_records');// redireciona para a view
+$date = (new Datetime())->getTimestamp();
+$today = strftime('%d de %B de %Y', $date);
+loadTemplateView('day_records', ['today' => $today]);// redireciona para a view
