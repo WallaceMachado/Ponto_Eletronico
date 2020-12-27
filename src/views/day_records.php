@@ -16,12 +16,12 @@
         </div>
         <div class="card-body">
             <div class="d-flex m-5 justify-content-around">
-                <span >Entrada 1: --- </span>
-                <span >Saída 1: --- </span>
+            <span class="record">Entrada 1: <?= $records->time1 ?? '---' ?></span>
+                <span class="record">Saída 1: <?= $records->time2 ?? '---' ?></span>
             </div>
             <div class="d-flex m-5 justify-content-around">
-                <span >Entrada 2: <?= $workingHours->time3 ?? '---' ?></span>
-                <span >Saída 2: <?= $workingHours->time4 ?? '---' ?></span>
+                <span class="record" >Entrada 2: <?= $records->time3 ?? '---' ?></span>
+                <span class="record" >Saída 2: <?= $records->time4 ?? '---' ?></span>
             </div>
         </div>
         <div class="card-footer d-flex justify-content-center">

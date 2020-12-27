@@ -14,6 +14,7 @@ class WorkingHours extends Model {
         'worked_time'
     ];
 
+    // carregar jornada de trabalho
     public static function loadFromUserAndDate($userId, $workDate) {
         $registry = self::getOne(['user_id' => $userId, 'work_date' => $workDate]);
 
