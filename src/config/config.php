@@ -4,7 +4,7 @@ date_default_timezone_set('America/Sao_Paulo');// define o fuso hoario da aplica
 setlocale(LC_TIME, 'pt_BR', 'pt_BR.uft-8', 'portuguese');// configuração de data
 
 // Constantes gerais
-define('DAILY_TIME', 60 * 60 * 8);
+define('DAILY_TIME', 60 * 60 * 8);// calcula os segundos
 
 // acesso as pastas Pastas
 define('MODEL_PATH', realpath(dirname(__FILE__) . '/../models'));// __FILE__ pega o caminho da pasta atual, o ponto concatena e /../ sai da pasta atual para a anterior e ai ele acessa a pasta models
@@ -19,6 +19,7 @@ define('EXCEPTION_PATH', realpath(dirname(__FILE__) . '/../exceptions'));
 require_once(realpath(dirname(__FILE__) . '/database.php')); // carrega a classe que chama o database
 require_once(realpath(dirname(__FILE__) . '/loader.php'));
 require_once(realpath(dirname(__FILE__) . '/session.php'));
+require_once(realpath(dirname(__FILE__) . '/date_utils.php'));
 require_once(realpath(MODEL_PATH . '/Model.php'));
 require_once(realpath(MODEL_PATH . '/User.php'));
 require_once(realpath(EXCEPTION_PATH . '/AppException.php'));
