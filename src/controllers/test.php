@@ -3,10 +3,13 @@
 
 
 
-loadModel('WorkingHours');
 
+
+
+print_r(obterUltimoDiaDoMes(new DateTime()));
+
+/*
 $wh = WorkingHours::loadFromUserAndDate(1, date('Y-m-d'));
-
 $intervaloTrabalhado = $wh->obterIntervalosTrabalhados()->format('%H:%I:%S');
 print_r($intervaloTrabalhado);
 echo "<br>";
@@ -15,7 +18,9 @@ $intervaloAlmoco = $wh->obterIntervaloDeAlmoco()->format('%H:%I:%S');
 print_r($intervaloAlmoco);
 echo "<br>";
 
-
+$startDate = obterPrimeiroDiaDoMes($date)->format('Y-m-d');
+print_r($intervaloAlmoco);
+echo "<br>";
 
 $horaSaida = $wh->obterHoraDeSaida();
 print_r($horaSaida);

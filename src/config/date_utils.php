@@ -45,3 +45,14 @@ function getDateFromString($str) {
     return DateTimeImmutable::createFromFormat('H:i:s', $str);
 }
 
+
+function obterPrimeiroDiaDoMes($date) {
+    $time = getDateAsDateTime($date)->getTimestamp();
+    return new DateTime(date('Y-m-1', $time));
+}
+
+function obterUltimoDiaDoMes($date) {
+    $time = getDateAsDateTime($date)->getTimestamp(); // pega a quantidade de horas
+    return new DateTime(date('Y-m-t', $time));// t faz retornar o ultimo dia do mes
+}
+

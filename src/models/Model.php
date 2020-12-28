@@ -100,11 +100,14 @@ class Model {
         if(count($filters) > 0) {
             $sql .= " WHERE 1 = 1";// condição sempre verdadeira e independente dos filtros, feito isso para poder utilizar a função and
             foreach($filters as $column => $value) {
-               
+
+                if($column == 'raw') {
+                    $sql .= " AND {$value}";
+                } else {
                     $sql .= " AND ${column} = " . static::getFormatedValue($value);
                 }
             }
-         
+        }
         return $sql;
     }
 

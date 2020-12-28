@@ -104,6 +104,25 @@ class WorkingHours extends Model {
         }
     }
 
+    public static function obterRelatorioMensal($userId, $date) {
+        $registries = [];
+        $startDate = obterPrimeiroDiaDoMes($date)->format('Y-m-d');
+        $endDate = obterUltimoDiaDoMes($date)->format('Y-m-d');
+
+        $result = static::getResultSetFromSelect([//busca consultas no banco
+            'user_id' => $userId,
+            'raw' => "work_date between '{$startDate}' AND '{$endDate}'"
+        ]);
+
+        if($result) {
+            while($row = $result->fetch_assoc()) {
+                $registries[$row['work_date']] = new WorkingHours($row);
+            }
+        }
+        
+        return $registries;
+    } 
+
      function obterRegistrosDePontos() {
         $times = [];
 
