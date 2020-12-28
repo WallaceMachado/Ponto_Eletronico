@@ -90,7 +90,19 @@ class WorkingHours extends Model {
         return $lunchInterval;
     }
 
+    function obterHoraDeSaida() {
+        [$t1,,, $t4] = $this->obterRegistrosDePontos();
+        $diaDeTrabalho = DateInterval::createFromDateString('8 hours'); // cria um intervalo de tempo de 8 horas, metodo od php
 
+        if(!$t1) {
+            return (new DateTimeImmutable())->add($diaDeTrabalho);// retorna um horario acrescido de 8 horas
+        } elseif($t4) {
+            return $t4;
+        } else {
+            $total = sumIntervals($diaDeTrabalho, $this->obterIntervaloDeAlmoco());
+            return $t1->add($total);
+        }
+    }
 
      function obterRegistrosDePontos() {
         $times = [];

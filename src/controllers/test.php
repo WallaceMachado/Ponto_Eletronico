@@ -15,6 +15,12 @@ $intervaloAlmoco = $wh->obterIntervaloDeAlmoco()->format('%H:%I:%S');
 print_r($intervaloAlmoco);
 echo "<br>";
 
+
+
+$horaSaida = $wh->obterHoraDeSaida();
+print_r($horaSaida);
+echo "<br>";
+
 /*
 [$t1,$t2,$t3,$t4] = $wh->obterRegistrosDePontos(); //pra testar tem que tornar o metodo publico
 
