@@ -56,3 +56,9 @@ function obterUltimoDiaDoMes($date) {
     return new DateTime(date('Y-m-t', $time));// t faz retornar o ultimo dia do mes
 }
 
+function obterSegundosDeUmIntervaloDeData($interval) {
+    $d1 = new DateTimeImmutable();
+    $d2 = $d1->add($interval);
+    return $d2->getTimestamp() - $d1->getTimestamp();
+}
+
