@@ -29,6 +29,12 @@ function loadTemplateView($viewName, $params = array()) {
         }
     }
 
+    $user = $_SESSION['user'];
+    $workingHours = WorkingHours::loadFromUserAndDate($user->id, date('Y-m-d'));
+    $horasTrabalhadas = $workingHours->obterIntervalosTrabalhados()->format('%H:%I:%S');// format transforma para string
+    $HoraDeSaida = $workingHours->obterHoraDeSaida()->format('H:i:s');// format transforma para string
+    
+
        
     require_once(TEMPLATE_PATH . "/header.php"); // template da view cabeçalho de pagina
     require_once(TEMPLATE_PATH . "/left.php");// menu lateral
