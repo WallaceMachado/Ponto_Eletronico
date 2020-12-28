@@ -80,6 +80,16 @@ class WorkingHours extends Model {
         return sumIntervals($part1, $part2); // soma de intervalo feito na date_utils
     }
 
+    function obterIntervaloDeAlmoco() {
+        [, $t2, $t3,] = $this->obterRegistrosDePontos();
+        $lunchInterval = new DateInterval('PT0S');
+
+        if($t2) $lunchInterval = $t2->diff(new DateTime());
+        if($t3) $lunchInterval = $t2->diff($t3);
+
+        return $lunchInterval;
+    }
+
 
 
      function obterRegistrosDePontos() {
