@@ -33,7 +33,7 @@ function loadTemplateView($viewName, $params = array()) {
     $workingHours = WorkingHours::loadFromUserAndDate($user->id, date('Y-m-d'));
     $horasTrabalhadas = $workingHours->obterIntervalosTrabalhados()->format('%H:%I:%S');// format transforma para string
     $HoraDeSaida = $workingHours->obterHoraDeSaida()->format('H:i:s');// format transforma para string
-    
+    $relogioAtivo = $workingHours->obterRelogioAtivo();
 
        
     require_once(TEMPLATE_PATH . "/header.php"); // template da view cabeçalho de pagina

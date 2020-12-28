@@ -39,12 +39,12 @@ class WorkingHours extends Model {
         return null;
     }
 
-    public function getActiveClock() {
+    public function obterRelogioAtivo() {// retorna o relogio que será atualizado na tela automaticamento pelo JS
         $nextTime = $this->getNextTime();
         if($nextTime === 'time1' || $nextTime === 'time3') {
-            return 'exitTime';
+            return 'horaDeSaida';
         } elseif($nextTime === 'time2' || $nextTime === 'time4') {
-            return 'workedInterval';
+            return 'horasTrabalhadas';
         } else {
             return null;
         }

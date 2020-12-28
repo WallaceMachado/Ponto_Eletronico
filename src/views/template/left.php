@@ -33,7 +33,8 @@
         <div class="sidebar-widget">
             <i class="icon icofont-hour-glass text-primary"></i>
             <div class="info">
-                <span class="main text-primary">
+                <span class="main text-primary"
+                    <?= $relogioAtivo === 'horasTrabalhadas' ? 'ative-relogio' : '' ?>>
                     <?= $horasTrabalhadas ?>
                 </span>
                 <span class="label text-muted">Horas Trabalhadas</span>
@@ -43,7 +44,8 @@
         <div class="sidebar-widget">
             <i class="icon icofont-ui-alarm text-danger"></i>
             <div class="info">
-                <span class="main text-danger">
+                <span class="main text-danger"  
+                <?= $relogioAtivo === 'horaDeSaida' ? 'ative-relogio' : '' ?>>
                     <?= $HoraDeSaida ?>
                 </span>
                 <span class="label text-muted">Hora de Saída</span>
