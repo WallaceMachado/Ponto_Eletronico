@@ -66,5 +66,32 @@ class WorkingHours extends Model {
         }
     }
 
-  
+    function obterIntervalosTrabalhados() {
+        [$t1, $t2, $t3, $t4] = $this->obterRegistrosDePontos();
+
+        $part1 = new DateInterval('PT0S');// dateinterval é padrão do PHP e PT0S informa 0 segundos
+        $part2 = new DateInterval('PT0S');
+
+        if($t1) $part1 = $t1->diff(new DateTime()); // horario atual menos o t1 -- diff é calculo padrão de intervalo do php
+        if($t2) $part1 = $t1->diff($t2);
+        if($t3) $part2 = $t3->diff(new DateTime());
+        if($t4) $part2 = $t3->diff($t4);
+
+        return sumIntervals($part1, $part2); // soma de intervalo feito na date_utils
+    }
+
+
+
+     function obterRegistrosDePontos() {
+        $times = [];
+
+        $this->time1 ? array_push($times, getDateFromString($this->time1)) : array_push($times, null);
+        $this->time2 ? array_push($times, getDateFromString($this->time2)) : array_push($times, null);
+        $this->time3 ? array_push($times, getDateFromString($this->time3)) : array_push($times, null);
+        $this->time4 ? array_push($times, getDateFromString($this->time4)) : array_push($times, null);
+
+        return $times;
+    }
 }
+
+  
