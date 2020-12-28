@@ -3,51 +3,25 @@
 
 session_start();
 requireValidSession();
+
+$dataAtual = new DateTime();
 $user = $_SESSION['user'];
 
-$registros = WorkingHours::obterRelatorioMensal($user->id, new DateTime());
-
-//print_r($registros);
-
-loadTemplateView('monthly_report', ['registros' => $registros]);
-
-/*
-
-$currentDate = new DateTime();
-
-$user = $_SESSION['user'];
-$selectedUserId = $user->id;
-$users = null;
-if($user->is_admin) {
-    $users = User::get();
-    $selectedUserId = $_POST['user'] ? $_POST['user'] : $user->id;
-}
-
-$selectedPeriod = $_POST['period'] ? $_POST['period'] : $currentDate->format('Y-m');
-$periods = [];
-for($yearDiff = 0; $yearDiff <= 2; $yearDiff++) {
-    $year = date('Y') - $yearDiff;
-    for($month = 12; $month >= 1; $month--) {
-        $date = new DateTime("{$year}-{$month}-1");
-        $periods[$date->format('Y-m')] = strftime('%B de %Y', $date->getTimestamp());
-    }
-}
-
-$registries = WorkingHours::getMonthlyReport($selectedUserId, $selectedPeriod);
+$registries = WorkingHours::obterRelatorioMensal($user->id, $dataAtual);
 
 $report = [];
-$workDay = 0;
-$sumOfWorkedTime = 0;
-$lastDay = getLastDayOfMonth($currentDate)->format('d');
+$diasUteisDoMes = 0;//não considera feriado
+$somadeHorasTrabalhadas = 0;
+$ultimoDia = obterUltimoDiaDoMes($dataAtual)->format('d');
 
-for($day = 1; $day <= $lastDay; $day++) {
-    $date = $currentDate->format('Y-m') . '-' . sprintf('%02d', $day);
+for($day = 1; $day <= $ultimoDia; $day++) {
+    $date = $dataAtual->format('Y-m') . '-' . sprintf('%02d', $day); //sprintf para add o zero nos nueros menores que 10
     $registry = $registries[$date];
     
-    if(isPastWorkday($date)) $workDay++;
+    if(eUmDiaDeTrabalhoNoPassado($date)) $diasUteisDoMes++;
 
     if($registry) {
-        $sumOfWorkedTime += $registry->worked_time;
+        $somadeHorasTrabalhadas += $registry->worked_time;
         array_push($report, $registry);
     } else {
         array_push($report, new WorkingHours([
@@ -57,16 +31,13 @@ for($day = 1; $day <= $lastDay; $day++) {
     }
 }
 
-$expectedTime = $workDay * DAILY_TIME;
-$balance = getTimeStringFromSeconds(abs($sumOfWorkedTime - $expectedTime));
-$sign = ($sumOfWorkedTime >= $expectedTime) ? '+' : '-';
+$expectativaDeTrabalhadasNoMes = $diasUteisDoMes * DAILY_TIME;//DAYLY é uma constante definida no config e calcula e retorna as 8 horas de trabalhos em segundos
+$saldo = obterHoraFormatadaDeUmTempoEmSegundos(abs($somadeHorasTrabalhadas - $expectativaDeTrabalhadasNoMes));// abs retorna o valor absoluto
+$sinal = ($somadeHorasTrabalhadas >= $expectativaDeTrabalhadasNoMes) ? '+' : '-';
 
 loadTemplateView('monthly_report', [
     'report' => $report,
-    'sumOfWorkedTime' => getTimeStringFromSeconds($sumOfWorkedTime),
-    'balance' => "{$sign}{$balance}",
-    'selectedPeriod' => $selectedPeriod,
-    'periods' => $periods,
-    'selectedUserId' => $selectedUserId,
-    'users' => $users,
+    'somadeHorasTrabalhadas' => ($somadeHorasTrabalhadas),
+    'saldo' => "{$sinal}{$saldo}",
+    
 ]);
