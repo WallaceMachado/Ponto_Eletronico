@@ -106,6 +106,16 @@ class WorkingHours extends Model {
         }
     }
 
+    function obterSaldo() {
+        if(!$this->time1 && !eUmDiaDeTrabalhoNoPassado($this->work_date)) return '';
+        if($this->worked_time == DAILY_TIME) return '-';// se horas trabalhadas for igual a Daily (8horas) preencher com -
+
+        $balance = $this->worked_time - DAILY_TIME;
+        $balanceString = obterHoraFormatadaDeUmTempoEmSegundos(abs($balance));
+        $sign = $this->worked_time >= DAILY_TIME ? '+' : '-';
+        return "{$sign}{$balanceString}";
+    }
+
     public static function obterRelatorioMensal($userId, $date) {
         $registries = [];
         $startDate = obterPrimeiroDiaDoMes($date)->format('Y-m-d');

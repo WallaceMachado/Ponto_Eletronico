@@ -73,3 +73,8 @@ function obterHoraFormatadaDeUmTempoEmSegundos($seconds) {
     return sprintf('%02d:%02d:%02d', $h, $m, $s);
 }
 
+function formatarDataComLocale($date, $pattern) {
+    $time = getDateAsDateTime($date)->getTimestamp();// pega a quantidade de horas
+    return strftime($pattern, $time);
+}
+

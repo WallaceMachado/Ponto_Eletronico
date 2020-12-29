@@ -37,7 +37,7 @@ $sinal = ($somadeHorasTrabalhadas >= $expectativaDeTrabalhadasNoMes) ? '+' : '-'
 
 loadTemplateView('monthly_report', [
     'report' => $report,
-    'somadeHorasTrabalhadas' => ($somadeHorasTrabalhadas),
+    'somadeHorasTrabalhadas' => obterHoraFormatadaDeUmTempoEmSegundos($somadeHorasTrabalhadas),
     'saldo' => "{$sinal}{$saldo}",
     
 ]);
