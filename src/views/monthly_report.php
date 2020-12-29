@@ -9,11 +9,24 @@
 	<div>
 
     <form class="mb-4" action="#" method="post">
+            <div class="input-group">
+				<?php if($user->is_admin): ?>
+					<select name="user" class="form-control mr-2" placeholder="Selecione o usuário...">
+						<option value="">Selecione o usuário</option>
+						<?php
+							foreach($users as $user) {
+								$selected = $user->id === $selectedUserId ? 'selected' : '';
+								echo "<option value='{$user->id}'{$selected}>{$user->name}</option>";
+							}
+						?>
+					</select>
+				<?php endif ?>
 			<select name="period" class="form-control" placeholder="Selecione o período...">
+
 					<?php
 						foreach($periods as $key => $month) {
-							
-							echo "<option value='{$key}'>{$month}</option>";
+							$selected = $key === $selectedPeriod ? 'selected' : '';
+							echo "<option value='{$key}'{$selected}>{$month}</option>";
 						}
 					?>
 				</select>

@@ -6,8 +6,14 @@ requireValidSession();
 
 $dataAtual = new DateTime();
 $user = $_SESSION['user'];
+$selectedUserId = $user->id;
+$users = null;
+if($user->is_admin) {
+    $users = User::get();//metodo get defindo na classe model
+    $selectedUserId = $_POST['user'] ? $_POST['user'] : $user->id;
+}
 
-$registries = WorkingHours::obterRelatorioMensal($user->id, $dataAtual);
+
 
 //$_POST['period'] = metodo post a patir da tela do usario no campo period 
 $selectedPeriod = $_POST['period'] ? $_POST['period'] : $dataAtual->format('Y-m');
@@ -21,6 +27,8 @@ for($diferencaDeAnos = 0; $diferencaDeAnos <= 2; $diferencaDeAnos++) {
         $periods[$date->format('Y-m')] = strftime('%B de %Y', $date->getTimestamp());
     }
 }
+
+$registries = WorkingHours::obterRelatorioMensal($selectedUserId, $selectedPeriod);
 $report = [];
 $diasUteisDoMes = 0;//não considera feriado
 $somadeHorasTrabalhadas = 0;
@@ -54,5 +62,7 @@ loadTemplateView('monthly_report', [
     'saldo' => "{$sinal}{$saldo}",
     'selectedPeriod' => $selectedPeriod,
     'periods' => $periods,
+    'selectedUserId' => $selectedUserId,
+    'users' => $users,
     
 ]);
