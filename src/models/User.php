@@ -14,5 +14,9 @@ class User extends Model {
         'is_admin'
     ];
 
+    public static function obterUsuariosAtivos() {
+        return static::obterContador(['raw' => 'end_date IS NULL']);
+    }
+
 }
    

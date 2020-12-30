@@ -111,6 +111,12 @@ class Model {
         return $sql;
     }
 
+    public static function obterContador($filters = []) {
+        $result = static::getResultSetFromSelect(
+            $filters, 'count(*) as count');
+        return $result->fetch_assoc()['count'];
+    }
+
     // verifica se o paramento é do formato 'string' se não for ele altera para que seja
     private static function getFormatedValue($value) {
         if(is_null($value)) {
