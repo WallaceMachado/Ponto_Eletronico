@@ -2,11 +2,26 @@
 // Controller temporário!!!
 
 
+$array = [
+    oi => 'Domingo',
+    oa =>'Segunda',
+    os =>'Terça',
+    od =>'Quarta',
+    of =>'Quinta',
+    og =>'Sexta',
+    ow =>'Sábado'
+];
 
+foreach ($array as $valor) {
+    echo "$valor <br>";
+}
 
+foreach ($array as $indice => $valor) {
+    $oi[$indice]=  $valor;
+    
+}
+print_r($oi);
 
-
-print_r(obterUltimoDiaDoMes(new DateTime()));
 
 /*
 $wh = WorkingHours::loadFromUserAndDate(1, date('Y-m-d'));

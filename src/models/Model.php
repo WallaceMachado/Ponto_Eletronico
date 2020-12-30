@@ -75,13 +75,24 @@ class Model {
     }
 
     public function insert() {
+        $novacoluna = [];
+        //excluindo o a coluna id, pois o id é preenchido automaticamente pelo banco
+        foreach(static::$columns as $indice => $valor) {
+            if($valor!=="id"){
+           $novaColuna[$indice]=$valor;
+           
+        }}
+        
         $sql = "INSERT INTO " . static::$tableName . " ("
-            . implode(",", static::$columns) . ") VALUES ("; //implode pega um array e transforma em uma string
+            . implode(",", $novaColuna) . ") VALUES ("; //implode pega um array e transforma em uma string
         foreach(static::$columns as $col) {
-            $sql .= static::getFormatedValue($this->$col) . ",";// pegando o valor da coluna do obejto e separando por virgula
+            if($col!=="id"){
+            $sql .= static::getFormatedValue($this->$col) . ",";}// pegando o valor da coluna do obejto e separando por virgula
         }
         $sql[strlen($sql) - 1] = ')';// no ultimo elemento da string fecha o parenteses, substitui a virgula final
-        $id = Database::executeSQL($sql);
+      
+
+         $id = Database::executeSQL($sql);
         $this->id = $id;
     }
 

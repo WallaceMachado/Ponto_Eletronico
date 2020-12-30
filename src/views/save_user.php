@@ -71,7 +71,7 @@
             </div>
         </div>
         <div class="form-row">
-            <div class="form-group col-md-1">
+            <div class="form-group col-md-6">
                 <label for="is_admin">Administrador?</label>
                 <input type="checkbox" id="is_admin" name="is_admin"
                     class="form-control <?= $errors['is_admin'] ? 'is-invalid' : '' ?>"

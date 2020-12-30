@@ -18,5 +18,15 @@ class User extends Model {
         return static::obterContador(['raw' => 'end_date IS NULL']);
     }
 
+    public function insert() {
+
+        
+        $this->is_admin = $this->is_admin ? 1 : 0;
+        if(!$this->end_date) $this->end_date = null;
+        
+        
+        return parent::insert(); 
+    }
+
 }
    
