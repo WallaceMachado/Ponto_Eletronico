@@ -27,5 +27,6 @@ foreach($users as $user) {
 }
 
 loadTemplateView('users', [
-    'users' => $users,
+    'users' => $users, 
+    'exception' => $exception
 ]);
