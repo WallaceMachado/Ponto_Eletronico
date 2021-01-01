@@ -1,6 +1,6 @@
 <?php
 session_start();
-requireValidSession();
+requireValidSession(true);// true coloca que tem ser admin, conforme classe confin/session
 
 
 $exception = null;

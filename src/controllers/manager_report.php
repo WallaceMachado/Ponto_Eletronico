@@ -1,6 +1,6 @@
 <?php
 session_start();
-requireValidSession(true);
+requireValidSession(true);// true coloca que tem ser admin, conforme classe confin/session
 
 $usuariosAtivos = User::obterUsuariosAtivos();
 $usuariosAusentes = WorkingHours::obterUsuariosAusentes();
