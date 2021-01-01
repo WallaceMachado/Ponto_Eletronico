@@ -8,7 +8,7 @@ class Model {
     protected $values = [];// pertece a cada objeto instanciado
 
     // construtor
-    function __construct($arr, $sanitize = true) {
+    function __construct($arr, $sanitize = true) {//sanitize, não permite a inclusão de carcteres especiais
         
         $this->loadFromArray($arr, $sanitize);
     }
@@ -16,12 +16,23 @@ class Model {
     // carrega os dados do array
     public function loadFromArray($arr, $sanitize = true) {
         if($arr) {// se o array estiver setado
+            // $conn = Database::getConnection();
             
             foreach($arr as $key => $value) {// pecorre o array e carrega no array values atributo da classe
               // $this->__set($key, $value);
-              $this->$key = $value;// como o set tem como precedente o __ o metod oset fica automatico e não precisa ser declarado (metodo magico)
-                }
-                ;
+           //   $this->$key = $value;// como o set tem como precedente o __ o metod oset fica automatico e não precisa ser declarado (metodo magico)
+              $cleanValue = $value;
+
+              // validações para evitar sql injections
+              if($sanitize && isset($cleanValue)) {
+                  $cleanValue = strip_tags(trim($cleanValue));
+                  $cleanValue = htmlentities($cleanValue, ENT_NOQUOTES);
+                  // $cleanValue = mysqli_real_escape_string($conn, $cleanValue);
+              }
+              $this->$key = $cleanValue; 
+            
+            }
+            // $conn->close();
             }
           
         }
