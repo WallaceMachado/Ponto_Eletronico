@@ -41,7 +41,7 @@ class User extends Model {
 
         if(!$this->email) {
             $errors['email'] = 'Email é um campo abrigatório.';
-        } elseif(!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+        } elseif(!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {//valida se é um email valido
             $errors['email'] = 'Email inválido.';
         }
 
@@ -63,6 +63,7 @@ class User extends Model {
             $errors['confirm_password'] = 'Confirmação de Senha é um campo abrigatório.';
         }
 
+        // verifica se as senhas são iguais
         if($this->password && $this->confirm_password 
             && $this->password !== $this->confirm_password) {
             $errors['password'] = 'As senhas não são iguais.';
